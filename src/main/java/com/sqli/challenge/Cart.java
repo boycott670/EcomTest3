@@ -1,17 +1,23 @@
 package com.sqli.challenge;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
 final class Cart
 {
-  private final Map<String, CartEntry> machinesCartEntries = new TreeMap<>();
-  private final Map<String, CartEntry> capsulesCartEntries = new TreeMap<>();
+  private final Map<String, CartEntry> machinesCartEntries = new HashMap<>();
+  private final Map<String, CartEntry> capsulesCartEntries = new HashMap<>();
   
   void addMachine(final String name, final CartEntry cartEntry)
   {
     addProduct(name, cartEntry, machinesCartEntries);
+  }
+  
+  void addCapsule(final String name, final CartEntry cartEntry)
+  {
+    addProduct(name, cartEntry, capsulesCartEntries);
   }
   
   private void addProduct(final String name, final CartEntry cartEntry, final Map<? super String, CartEntry> productscartEntries)
@@ -61,5 +67,10 @@ final class Cart
   String content()
   {
     return cartEntriesContent("Capsules", capsulesCartEntries) + cartEntriesContent("Machines", machinesCartEntries);
+  }
+  
+  void addTo(final Summary summary)
+  {
+    summary.addTo(machinesCartEntries, capsulesCartEntries);
   }
 }

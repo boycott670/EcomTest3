@@ -25,7 +25,7 @@ final class CartEntry
     return Optional.of(new CartEntry(groupedQuantity, unitPrice));
   }
   
-  private int total()
+  int total()
   {
     return quantity * unitPrice;
   }
@@ -33,5 +33,10 @@ final class CartEntry
   String content()
   {
     return String.format("\tQuantity: %d\tPrice: %d", quantity, total());
+  }
+  
+  void addTo(final SummaryEntry summaryEntry)
+  {
+    summaryEntry.add(quantity, total());
   }
 }
