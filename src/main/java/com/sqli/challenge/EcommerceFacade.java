@@ -1,40 +1,52 @@
 package com.sqli.challenge;
 
-import java.util.List;
+public class EcommerceFacade
+{
+  private final Cart cart = new Cart();
+  
+  public void addMachine(String name, int quantity, int unitPrice)
+  {
+    cart.addMachine(name, new CartEntry(quantity, unitPrice));
+  }
 
-public class EcommerceFacade {
-    public void addMachine(String name, int quantity, int unitPrice) {
-    }
+  public void removeMachine(String name, int quantity)
+  {
+  }
 
-    public void removeMachine(String name, int quantity) {
-    }
+  public void addCapsule(String name, int quantity, int unitPrice)
+  {
+  }
 
-    public void addCapsule(String name, int quantity, int unitPrice) {
-    }
+  public String cartContent()
+  {
+    return cart.content();
+  }
 
-    public String cartContent() {
-        return null;
-    }
+  public EcommerceFacade order()
+  {
+    return this;
+  }
 
-    public EcommerceFacade order() {
-        return this;
-    }
+  public boolean hasErrors()
+  {
+    return false;
+  }
 
-    public boolean hasErrors() {
-        return false;
-    }
+  public String errors()
+  {
+    return null;
+  }
 
-    public String errors() {
-        return null;
-    }
+  public void voucher(String code)
+  {
+  }
 
-    public void voucher(String code) {
-    }
+  public void removeCapsule(String name, int quantity)
+  {
+  }
 
-    public void removeCapsule(String name, int quantity) {
-    }
-
-    public String summary() {
-        return null;
-    }
+  public String summary()
+  {
+    return null;
+  }
 }
