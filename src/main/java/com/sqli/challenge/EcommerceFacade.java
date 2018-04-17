@@ -43,6 +43,7 @@ public class EcommerceFacade
 
   public void voucher(String code)
   {
+    cart.addVoucher(code);
   }
 
   public void removeCapsule(String name, int quantity)

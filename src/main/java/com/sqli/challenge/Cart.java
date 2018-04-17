@@ -14,6 +14,8 @@ final class Cart
   private final Map<String, CartEntry> machinesCartEntries = new HashMap<>();
   private final Map<String, CartEntry> capsulesCartEntries = new HashMap<>();
   
+  private String voucher;
+  
   void addMachine(final String name, final CartEntry cartEntry)
   {
     addProduct(name, cartEntry, machinesCartEntries);
@@ -85,6 +87,16 @@ final class Cart
     restrictions.add(new EmptyCartRestriction(machinesCartEntries, capsulesCartEntries));
     restrictions.add(new PackagingRuleCapsulesRestriction(CAPSULES_QUANTITY_FACTOR, capsulesCartEntries));
     
+    if (voucher != null && !voucher.trim().isEmpty())
+    {
+      restrictions.add(new VoucherCodeRestriction(voucher, machinesCartEntries));
+    }
+    
     return new CartRestrictions(restrictions);
+  }
+  
+  void addVoucher(final String voucher)
+  {
+    this.voucher = voucher;
   }
 }
