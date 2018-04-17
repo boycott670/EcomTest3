@@ -1,5 +1,7 @@
 package com.sqli.challenge;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -7,6 +9,8 @@ import java.util.TreeMap;
 
 final class Cart
 {
+  private static final int CAPSULES_QUANTITY_FACTOR = 5;
+  
   private final Map<String, CartEntry> machinesCartEntries = new HashMap<>();
   private final Map<String, CartEntry> capsulesCartEntries = new HashMap<>();
   
@@ -72,5 +76,15 @@ final class Cart
   void addTo(final Summary summary)
   {
     summary.addTo(machinesCartEntries, capsulesCartEntries);
+  }
+  
+  CartRestrictions createRestrictions()
+  {
+    final Collection<Restriction> restrictions = new ArrayList<>();
+    
+    restrictions.add(new EmptyCartRestriction(machinesCartEntries, capsulesCartEntries));
+    restrictions.add(new PackagingRuleCapsulesRestriction(CAPSULES_QUANTITY_FACTOR, capsulesCartEntries));
+    
+    return new CartRestrictions(restrictions);
   }
 }

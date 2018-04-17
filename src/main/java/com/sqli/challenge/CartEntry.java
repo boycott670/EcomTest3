@@ -39,4 +39,9 @@ final class CartEntry
   {
     summaryEntry.add(quantity, total());
   }
+  
+  boolean isMultipleOf(final int multiple)
+  {
+    return quantity % multiple == 0;
+  }
 }

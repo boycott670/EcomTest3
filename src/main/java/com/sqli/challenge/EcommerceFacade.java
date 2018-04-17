@@ -3,6 +3,7 @@ package com.sqli.challenge;
 public class EcommerceFacade
 {
   private final Cart cart = new Cart();
+  private EvaluationResult orderEvaluationResult;
   
   public void addMachine(String name, int quantity, int unitPrice)
   {
@@ -26,17 +27,18 @@ public class EcommerceFacade
 
   public EcommerceFacade order()
   {
+    orderEvaluationResult = cart.createRestrictions().evaluate();
     return this;
   }
 
   public boolean hasErrors()
   {
-    return false;
+    return orderEvaluationResult.hasErrors();
   }
 
   public String errors()
   {
-    return null;
+    return orderEvaluationResult.errors();
   }
 
   public void voucher(String code)
